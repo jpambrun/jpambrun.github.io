@@ -1,0 +1,4 @@
+/*
+ jpxTest 2014-11-14 
+*/
+"use strict";importScripts("jpx.js","util.js","arithmetic_decoder.js");var jpxImage=new JpxImage;self.onmessage=function(a){var b=a.data,c=new XMLHttpRequest,d=Date.now();if(c.open("GET",b,!1),c.responseType="arraybuffer",c.send(),200!==c.status)throw Error(c.status+" "+c.statusText+": "+b);var e=new Uint8Array(c.response),f=Date.now(),g=f-d,h=Date.now();jpxImage.parse(e);var i=Date.now(),j=i-h,k=Math.round(e.length/1024),l=jpxImage.width,m=jpxImage.height,n=(jpxImage.componentsCount,jpxImage.tiles.length,jpxImage.tiles[0]),o=n.items;self.postMessage({pixelData:o.buffer,width:l,height:m,fileSize:k,decodeTime:j,downloadTime:g,url:b},[o.buffer])};

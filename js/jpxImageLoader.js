@@ -1,0 +1,4 @@
+/*
+ jpxTest 2014-11-14 
+*/
+function jpxLoadImage(a){var b=$.Deferred();jpxdlworker.onmessage=function(c){var d=new Int16Array(c.data.pixelData),e=c.data.width,f=c.data.height;console.log("file size: ",c.data.fileSize),console.log("download time: ",c.data.downloadTime),console.log("decoding time: ",c.data.decodeTime);var g={imageId:a,minPixelValue:-1100,maxPixelValue:1500,slope:1,intercept:0,windowCenter:-600,windowWidth:1600,render:cornerstone.renderGrayscaleImage,getPixelData:function(){return d},rows:e,columns:f,height:f,width:e,color:!1,columnPixelSpacing:.8984375,rowPixelSpacing:.8984375,sizeInBytes:e*f*2};b.resolve(g)};var c=a.indexOf(":")+3,d=a.substring(c,a.length);return jpxdlworker.postMessage(d),b}jpxdlworker=new Worker("js/jpxdlworker.js");

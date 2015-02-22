@@ -1,0 +1,4 @@
+/*
+ jpxTest 2014-11-14 
+*/
+function jpxReceiver(a){var b=new Int16Array(a.data.pixelData),c=a.data.width,d=a.data.height,e=a.data.url;console.log("file size: ",a.data.fileSize),console.log("download time: ",a.data.downloadTime),console.log("decoding time: ",a.data.decodeTime);var f={imageId:e,minPixelValue:-1100,maxPixelValue:1500,slope:1,intercept:0,windowCenter:-600,windowWidth:1600,render:cornerstone.renderGrayscaleImage,getPixelData:function(){return b},rows:c,columns:d,height:d,width:c,color:!1,columnPixelSpacing:.8984375,rowPixelSpacing:.8984375,sizeInBytes:c*d*2};cornerstone.imageCache.putImage(e,f)}function loadImage(a){jpxdlworker[workerCount%2].postMessage(a),workerCount++}var jpxdlworker=[];jpxdlworker[0]=new Worker("js/jpxdlworker.js"),jpxdlworker[1]=new Worker("js/jpxdlworker.js"),jpxdlworker[0].onmessage=jpxReceiver,jpxdlworker[1].onmessage=jpxReceiver;var workerCount=0;
